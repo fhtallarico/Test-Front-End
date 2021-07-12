@@ -1,7 +1,7 @@
 # Test-Front-End
 Welcome to my Corebiz test repository.
 
-To start fist move to the project's folder using
+To start first move to the project's folder using
 
 ```bash
 cd corebiz
