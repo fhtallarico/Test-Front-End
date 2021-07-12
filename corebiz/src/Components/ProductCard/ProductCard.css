@@ -1,0 +1,51 @@
+.product-card {
+    max-width: 214px;
+    max-height: 400px;
+}
+
+.img-container{
+    height: 200px;
+}
+
+.product-details{
+    height: 200px;
+    text-align: center;
+}
+
+.product-name{
+    font-size: 12px;
+    color: #7A7A7A;
+    grid-row: 1;
+}
+
+.star-ratings{
+    grid-row: 2;
+}
+
+.before-price{
+    grid-row: 3;
+    font-size: 12px;
+    color: #7A7A7A;
+}
+
+.current-price{
+    grid-row: 4;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.prod-installments{
+    grid-row: 5;
+    font-size: 11px;
+    color: #7A7A7A;
+}
+
+.comprar-btn{
+    grid-row: 6;
+    background-color: black;
+    border-radius: 5px;
+    color: white;
+    opacity: 1;
+    width: 125px;
+    height: 32px
+}
