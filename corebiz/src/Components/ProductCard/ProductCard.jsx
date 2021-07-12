@@ -35,7 +35,9 @@ const ProductCard = (props) => {
                 <p></p>
             )
         }
-        <button class="comprar-btn">COMPRAR</button>
+        <button class="comprar-btn" onClick={()=> {
+            props.addToCart("id Producto", props.ProductId)
+        }}>COMPRAR</button>
       </div>
     </div>
   );

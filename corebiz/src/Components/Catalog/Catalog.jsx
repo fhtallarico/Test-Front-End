@@ -9,10 +9,15 @@ const Catalog = () => {
   const [products, setProducts] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage] = useState(4);
+  let cart = []
 
   const indexOfLastProd = currentPage * postsPerPage;
   const indexOfFirstProd = indexOfLastProd - postsPerPage;
   const currentProds = products.slice(indexOfFirstProd, indexOfLastProd);
+
+  const addToCart = (id, product) => {
+    localStorage.setItem(id, product);
+  }
 
   const nextPage = () => {
     if (currentPage < Math.ceil(products.length / postsPerPage)) {
@@ -28,7 +33,7 @@ const Catalog = () => {
 
   useEffect(() => {
     axios
-      .get("https://corebiz-test.herokuapp.com/api/v1/products")
+      .get("https://corebiz-test.herokuapp.com/api/v1/products/")
       .then((res) => {
         console.log(res.data);
         setProducts(res.data);
@@ -59,6 +64,7 @@ const Catalog = () => {
                     listPrice={product.listPrice}
                     price={((product.price / 10) + ".00")}
                     installments={product.installments}
+                    addToCart={addToCart}
                   />
                 );
               })
