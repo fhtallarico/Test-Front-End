@@ -3,58 +3,48 @@ import StarRatings from "react-star-ratings";
 import "./ProductCard.css";
 
 const ProductCard = (props) => {
+  const { product, addToCart } = props;
+
   return (
     <div class="product-card">
       <div class="img-container">
-        <img src={props.imageUrl} alt="..." />
+        <img src={product.imageUrl} alt="..." />
       </div>
       <div class="product-details">
-        <p class="product-name">{props.productName}</p>
-        <StarRatings
-          class="star-ratings"
-          rating={props.stars}
-          starRatedColor="red"
-          starDimension="10.35px"
-          numberOfStars={5}
-        />
-        {props.listPrice ? (
-          <div>
-            <p class="before-price">de $ {props.listPrice}</p>
-            <p class="current-price">por $ {props.price}</p>
-          </div>
-        ) : (
-          <div>
-            <p class="before-price">de $ {props.price}</p>
-            console.log(props.price)
-            <p class="current-price">por $ {props.price}</p>
-          </div>
-        )}
-        {props.installments?.length ? (
-          <p class="prod-installments">
-            o en {props.installments[0].quantity} de ${" "}
-            {props.installments[0].value}
-          </p>
-        ) : (
-          <></>
-        )}
+        <div class="product-texts">
+          <p class="product-name">{product.productName}</p>
+          <StarRatings
+            class="star-ratings"
+            rating={product.stars}
+            starRatedColor="red"
+            starDimension="10.35px"
+            numberOfStars={5}
+          />
+          {product.listPrice ? (
+            <div>
+              <p class="before-price">de $ {product.listPrice}</p>
+              <p class="current-price">por $ {product.price}</p>
+            </div>
+          ) : (
+            <div>
+              <p class="before-price">de $ {product.price}</p>
+              <p class="current-price">por $ {product.price}</p>
+            </div>
+          )}
+          {product.installments?.length ? (
+            <p class="prod-installments">
+              o en {product.installments[0].quantity} de ${" "}
+              {product.installments[0].value}
+            </p>
+          ) : (
+            <></>
+          )}
+        </div>
+
         <button
           class="comprar-btn"
           onClick={() => {
-            let product = {
-              id: props.productId,
-              name: props.productName,
-              imageUrl: props.imageUrl,
-              quantity: 1,
-              price: props.price,
-            };
-            if (localStorage.getItem(product.id)) {
-              let savedProduct = JSON.parse(localStorage.getItem(product.id))
-              savedProduct.quantity += 1;
-              localStorage.setItem(product.id, JSON.stringify(savedProduct));
-              console.log(savedProduct)
-            } else {
-              localStorage.setItem(product.id, JSON.stringify(product));
-            }
+            addToCart(product);
           }}
         >
           COMPRAR

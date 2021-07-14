@@ -9,11 +9,31 @@ const Catalog = () => {
   const [products, setProducts] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage] = useState(4);
+  const [cartItems, setCartItems] = useState([]);
 
   const indexOfLastProd = currentPage * postsPerPage;
   const indexOfFirstProd = indexOfLastProd - postsPerPage;
   const currentProds = products.slice(indexOfFirstProd, indexOfLastProd);
 
+  const addToCart = (product) => {
+
+    const exist = cartItems.find((x) => x.productId === product.productId);
+    if (exist) {
+      setCartItems(
+        cartItems.map((x) =>
+          x.productId === product.productId ? { ...exist, qty: exist.qty + 1 } : x
+        )
+      );
+    } else {
+      setCartItems([...cartItems, { ...product, qty: 1 }]);
+    }
+    if (localStorage.getItem("cart")) {
+      localStorage.clear()
+      localStorage.setItem("cart", JSON.stringify(cartItems));
+    } else {
+      localStorage.setItem("cart", JSON.stringify(cartItems));
+    }
+  };
 
   const nextPage = () => {
     if (currentPage < Math.ceil(products.length / postsPerPage)) {
@@ -39,7 +59,7 @@ const Catalog = () => {
   return (
     <div>
       <div class="catalog">
-      <h2 class="cat-text">Mas vendidos</h2>
+        <h2 class="cat-text">Mas vendidos</h2>
         <div class="cat-wrapper">
           <div>
             <FontAwesomeIcon
@@ -49,21 +69,11 @@ const Catalog = () => {
               }}
             />
           </div>
-          
+
           <div class="prods-list">
             {currentProds?.length ? (
               currentProds.map((product) => {
-                return (
-                  <ProductCard
-                    productId={product.productId}
-                    productName={product.productName}
-                    stars={product.stars}
-                    imageUrl={product.imageUrl}
-                    listPrice={product.listPrice / 10 + ".00"}
-                    price={product.price / 10 + ".00"}
-                    installments={product.installments}
-                  />
-                );
+                return <ProductCard product={product} addToCart={addToCart} />;
               })
             ) : (
               <h1>Error al cargar productos</h1>

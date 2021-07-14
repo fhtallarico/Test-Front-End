@@ -1,0 +1,24 @@
+.cart-card{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 95%;
+    border: 1px solid #b6b5b5;
+    height: 80px;
+    margin: 3px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+.cart-card-img{
+    max-width: 80px;
+    max-height: 100%
+}
+.cart-card-title{
+    margin-left: 80px;
+    margin-right: 50px;
+}
+.cart-card-price{
+    position: relative;
+    flex-flow: flex-end;
+    margin-left: 50px;
+}

@@ -41,9 +41,10 @@ const NewsForm = () => {
     <div class="news-form">
       <h3 class="form-tittle">¡Únete a nuestras novedades y promociones!</h3>
       <form class="form-ingreso">
-        <input type="text" id="input-name" placeholder="Ingresa tu nombre" />
-        <input type="text" id="input-email" placeholder="Ingresa tu mail" />
+        <input class= "form-input" type="text" id="input-name" placeholder="Ingresa tu nombre" />
+        <input class= "form-input" type="text" id="input-email" placeholder="Ingresa tu mail" />
         <button
+        class ="form-btn"
           onClick={(e) => {
             handleSubmit(e);
           }}

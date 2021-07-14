@@ -5,7 +5,14 @@
 }
 
 .search-input{
-    width: 100%;
+    width: 75%;
     border: 0px;
     text-align: center;
+    border-bottom: 1px solid #adadad;
+    margin-left: 50px;
+    margin-right: 50px;
+}
+
+.search-input :focus {
+    border: 0px;
 }
