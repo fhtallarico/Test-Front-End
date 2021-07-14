@@ -9,15 +9,11 @@ const Catalog = () => {
   const [products, setProducts] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage] = useState(4);
-  let cart = []
 
   const indexOfLastProd = currentPage * postsPerPage;
   const indexOfFirstProd = indexOfLastProd - postsPerPage;
   const currentProds = products.slice(indexOfFirstProd, indexOfLastProd);
 
-  const addToCart = (id, product) => {
-    localStorage.setItem(id, product);
-  }
 
   const nextPage = () => {
     if (currentPage < Math.ceil(products.length / postsPerPage)) {
@@ -43,6 +39,7 @@ const Catalog = () => {
   return (
     <div>
       <div class="catalog">
+      <h2 class="cat-text">Mas vendidos</h2>
         <div class="cat-wrapper">
           <div>
             <FontAwesomeIcon
@@ -52,6 +49,7 @@ const Catalog = () => {
               }}
             />
           </div>
+          
           <div class="prods-list">
             {currentProds?.length ? (
               currentProds.map((product) => {
@@ -61,10 +59,9 @@ const Catalog = () => {
                     productName={product.productName}
                     stars={product.stars}
                     imageUrl={product.imageUrl}
-                    listPrice={product.listPrice}
-                    price={((product.price / 10) + ".00")}
+                    listPrice={product.listPrice / 10 + ".00"}
+                    price={product.price / 10 + ".00"}
                     installments={product.installments}
-                    addToCart={addToCart}
                   />
                 );
               })
